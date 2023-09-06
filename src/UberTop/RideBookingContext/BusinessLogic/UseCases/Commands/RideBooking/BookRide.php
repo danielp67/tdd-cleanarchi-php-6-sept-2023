@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking;
+namespace App\UberTop\RideBookingContext\BusinessLogic\UseCases\Commands\RideBooking;
 
 use App\UberTop\RideBookingContext\BusinessLogic\Models\DateProvider;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;

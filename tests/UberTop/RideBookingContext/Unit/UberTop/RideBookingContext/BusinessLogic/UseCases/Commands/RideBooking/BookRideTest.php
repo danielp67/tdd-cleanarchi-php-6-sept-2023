@@ -4,7 +4,7 @@ use App\Tests\UberTop\RideBookingContext\Unit\UberTop\RideBookingContext\Adapter
 use App\Tests\UberTop\RideBookingContext\Unit\UberTop\RideBookingContext\Adapters\Secondary\TripScanning\TripScannerStub;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\DeterministicDateProvider;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
-use App\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking\BookRide;
+use App\UberTop\RideBookingContext\BusinessLogic\UseCases\Commands\RideBooking\BookRide;
 
 beforeEach(function () {
     $this->rideRepository = new RideRepositoryStub();

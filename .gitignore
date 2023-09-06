@@ -17,3 +17,5 @@
 ###< symfony/phpunit-bridge ###
 
 tests/coverage
+
+ docker-postgresql-data-for-test/

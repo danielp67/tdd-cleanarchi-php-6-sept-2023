@@ -3,7 +3,7 @@
 namespace App\UberTop\RideBookingContext\Adapters\Primary\Symfony\Controllers;
 
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
-use App\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking\BookRide;
+use App\UberTop\RideBookingContext\BusinessLogic\UseCases\Commands\RideBooking\BookRide;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
