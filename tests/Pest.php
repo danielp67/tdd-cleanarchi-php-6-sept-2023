@@ -2,6 +2,7 @@
 
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Rfc4122\UuidV4;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -46,8 +47,8 @@ function selectAllRides(EntityManagerInterface $entityManager): array
         $results = $stmt->executeQuery()->fetchAllAssociative();
         return array_map(function ($row) {
             return new Ride(
-                $row['id'],
-                $row['rider_id'],
+                UuidV4::fromString($row['id']),
+                UuidV4::fromString($row['rider_id']),
                 $row['departure'],
                 $row['arrival'],
                 $row['price'],

@@ -3,3 +3,9 @@ services:
   App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository:
     alias: App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\DoctrineRideRepository
     public: true
+
+  App\UberTop\RideBookingContext\BusinessLogic\Models\DateProvider:
+    alias: App\UberTop\RideBookingContext\BusinessLogic\Models\DeterministicDateProvider
+    public: true
+
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner: '@fake.trip.scanner'
