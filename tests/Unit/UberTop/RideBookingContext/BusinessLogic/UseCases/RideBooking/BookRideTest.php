@@ -32,19 +32,20 @@ it('can book a basic ride with some distance', function(
 
 
 it('can book a basic ride with adapted price for uberX option', function(
-    $hasUberX, $expectedPrice
+    $hasUberX, $distance, $expectedPrice
 ) {
     // ARRANGE
     $rideRepository = new RideRepositoryStub();
     $tripScanner = new TripScannerStub();
     $bookRide = new BookRide($rideRepository, $tripScanner);
-    $tripScanner->setDistance(0);
+    $tripScanner->setDistance($distance);
     // ACT
     $bookRide->book("8 avenue Foch Paris", "8 avenue Foch Paris", $hasUberX);
     // ASSERT
     expectBookedRides($rideRepository, "8 avenue Foch Paris", $expectedPrice);
 })->with([
-    "has UberX" => [true, 15],
+    "has UberX for 0km" => [true, 0, 15],
+    "has UberX for 1km" => [true, 1, 15.5],
 ]);
 
 function expectBookedRides(RideRepositoryStub $rideRepository, $arrival, $expectedPrice): void
