@@ -6,6 +6,8 @@ use App\UberTop\RideBookingContext\BusinessLogic\Models\DateProvider;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner;
+use Ramsey\Uuid\Rfc4122\UuidV4;
+use Ramsey\Uuid\UuidInterface;
 
 class BookRide
 {
@@ -16,12 +18,12 @@ class BookRide
     {
     }
 
-    public function book(string $departure, string $arrival, bool $wantsUberX): void
+    public function book(UuidInterface $riderId, string $departure, string $arrival, bool $wantsUberX): void
     {
         $distance = $this->tripScanner->distance($departure, $arrival);
         $ride = Ride::book(
-            "123abc",
-            "234def",
+            UuidV4::fromString("a56ee94f-799a-46eb-97b2-2e5dece46339"),
+            $riderId,
             $departure,
             $arrival,
             $distance,

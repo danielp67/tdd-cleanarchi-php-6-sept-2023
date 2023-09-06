@@ -39,3 +39,5 @@ services:
 
   App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository: '@App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\DoctrineRideRepository'
 
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Queries\RideQuery: '@App\UberTop\RideBookingContext\Adapters\Secondary\Queries\SqlRideQuery'
+

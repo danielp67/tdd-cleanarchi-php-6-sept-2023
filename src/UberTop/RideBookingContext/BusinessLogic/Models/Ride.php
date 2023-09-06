@@ -2,22 +2,21 @@
 
 namespace App\UberTop\RideBookingContext\BusinessLogic\Models;
 
-use Cassandra\Date;
 use DateTime;
-
+use Ramsey\Uuid\UuidInterface;
 class Ride
 {
 
-    public function __construct(private string $id,
-                                private string $riderId,
+    public function __construct(private UuidInterface $id,
+                                private UuidInterface $riderId,
                                 private string $departure,
                                 private string $arrival,
                                 private float  $price)
     {
     }
 
-    public static function book(string $id,
-                                string $riderId,
+    public static function book(UuidInterface $id,
+                                UuidInterface $riderId,
                                 string $departure,
                                 string $arrival,
                                 float  $distance,
@@ -41,12 +40,12 @@ class Ride
         return $price;
     }
 
-    public function getId(): string
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
 
-    public function getRiderId(): string
+    public function getRiderId(): UuidInterface
     {
         return $this->riderId;
     }
