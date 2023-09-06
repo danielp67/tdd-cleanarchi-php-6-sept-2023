@@ -24,9 +24,9 @@ services:
   # please note that last definitions always *replace* previous ones
 
   fake.trip.scanner:
-    class: App\RideBookingContext\Adapters\Secondary\TripScanning\FakeTripScanner
+    class: App\UberTop\RideBookingContext\Adapters\Secondary\TripScanning\FakeTripScanner
     calls:
       - setDistance: [ 2 ]
 
-  App\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner: '@fake.trip.scanner'
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner: '@fake.trip.scanner'
 

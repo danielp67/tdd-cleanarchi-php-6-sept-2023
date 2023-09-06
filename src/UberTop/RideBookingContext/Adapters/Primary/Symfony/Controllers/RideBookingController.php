@@ -2,8 +2,7 @@
 
 namespace App\UberTop\RideBookingContext\Adapters\Primary\Symfony\Controllers;
 
-use App\Tests\Unit\UberTop\RideBookingContext\Adapters\Secondary\TripScanning\TripScannerStub;
-use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner;
+use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use App\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking\BookRide;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,7 +15,7 @@ class RideBookingController extends AbstractController
 
 
     public function __construct(private readonly BookRide    $bookRide,
-                                private readonly TripScanner $tripScanner)
+                                private readonly RideRepository $rideRepository)
     {
     }
 
@@ -25,7 +24,7 @@ class RideBookingController extends AbstractController
     {
         $this->bookRide->book("8 avenue Foch Paris",
             "199 avenue Foch Paris");
-        dd($this->tripScanner);
+        dd($this->rideRepository);
         return $this->json('Ride booked', 201);
     }
 

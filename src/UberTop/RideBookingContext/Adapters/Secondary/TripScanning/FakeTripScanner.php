@@ -7,7 +7,7 @@ use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\Tri
 class FakeTripScanner implements TripScanner
 {
 
-    private float $distance = 0;
+    private float $distance = -1;
 
     function distance(string $departure, string $arrival): float
     {
