@@ -9,7 +9,7 @@ use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\Tri
 use Ramsey\Uuid\Rfc4122\UuidV4;
 use Ramsey\Uuid\UuidInterface;
 
-class BookRide
+class BookRideCommandHandler
 {
 
     public function __construct(private readonly RideRepository $rideRepository,
@@ -18,16 +18,16 @@ class BookRide
     {
     }
 
-    public function book(UuidInterface $riderId, string $departure, string $arrival, bool $wantsUberX): void
+    public function __invoke(BookRideCommand $command): void
     {
-        $distance = $this->tripScanner->distance($departure, $arrival);
+        $distance = $this->tripScanner->distance($command->departure, $command->arrival);
         $ride = Ride::book(
             UuidV4::fromString("a56ee94f-799a-46eb-97b2-2e5dece46339"),
-            $riderId,
-            $departure,
-            $arrival,
+            $command->riderId,
+            $command->departure,
+            $command->arrival,
             $distance,
-            $wantsUberX,
+            $command->wantsUberX,
             $this->dateProvider->now(),
         );
         $this->rideRepository->save($ride);
