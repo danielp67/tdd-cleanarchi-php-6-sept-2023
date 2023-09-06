@@ -28,5 +28,12 @@ services:
     calls:
       - setDistance: [ 2 ]
 
+  deterministic.date.provider:
+    class: App\UberTop\RideBookingContext\BusinessLogic\Models\DeterministicDateProvider
+    calls:
+      - setDateNowAsString: ['2023-12-25']
+
   App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner: '@fake.trip.scanner'
+
+  App\UberTop\RideBookingContext\BusinessLogic\Models\DateProvider: '@deterministic.date.provider'
 

@@ -23,7 +23,7 @@ class RideBookingController extends AbstractController
     public function bookRide(Request $request): JsonResponse
     {
         $this->bookRide->book("8 avenue Foch Paris",
-            "199 avenue Foch Paris");
+            "199 avenue Foch Paris", true);
         dd($this->rideRepository);
         return $this->json('Ride booked', 201);
     }

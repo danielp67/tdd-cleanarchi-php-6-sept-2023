@@ -2,6 +2,7 @@
 
 namespace App\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking;
 
+use App\UberTop\RideBookingContext\BusinessLogic\Models\DateProvider;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner;
@@ -10,7 +11,8 @@ class BookRide
 {
 
     public function __construct(private readonly RideRepository $rideRepository,
-                                private readonly TripScanner    $tripScanner)
+                                private readonly TripScanner    $tripScanner,
+                                private readonly DateProvider   $dateProvider)
     {
     }
 
@@ -23,7 +25,8 @@ class BookRide
             $departure,
             $arrival,
             $distance,
-            $wantsUberX
+            $wantsUberX,
+            $this->dateProvider->now(),
         );
         $this->rideRepository->save($ride);
     }
