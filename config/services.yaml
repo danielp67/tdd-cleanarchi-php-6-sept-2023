@@ -22,3 +22,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    fake.trip.scanner:
+        class: App\RideBookingContext\Adapters\Secondary\TripScanning\FakeTripScanner
+        calls:
+            - method: setDistance
+            - arguments: [2]
+
+    App\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner: '@fake.trip.scanner'
+

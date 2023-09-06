@@ -1,5 +1,5 @@
 controllers:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/UberTop/RideBookingContext/Adapters/Primary/Symfony/Controllers/
+        namespace: App\UberTop\RideBookingContext\Adapters\Primary\Symfony\Controllers
     type: attribute
