@@ -1,7 +1,7 @@
 <?php
 
-use App\Tests\Unit\UberTop\RideBookingContext\Adapters\Secondary\Repositories\RideRepositoryStub;
-use App\Tests\Unit\UberTop\RideBookingContext\Adapters\Secondary\TripScanning\TripScannerStub;
+use App\Tests\UberTop\RideBookingContext\Unit\UberTop\RideBookingContext\Adapters\Secondary\Repositories\RideRepositoryStub;
+use App\Tests\UberTop\RideBookingContext\Unit\UberTop\RideBookingContext\Adapters\Secondary\TripScanning\TripScannerStub;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\DeterministicDateProvider;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use App\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking\BookRide;

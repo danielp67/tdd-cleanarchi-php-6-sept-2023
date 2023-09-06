@@ -1,0 +1,5 @@
+services:
+
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository:
+    alias: App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\DoctrineRideRepository
+    public: true

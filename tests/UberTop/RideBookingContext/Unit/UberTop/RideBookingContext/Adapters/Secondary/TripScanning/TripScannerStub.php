@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\UberTop\RideBookingContext\Adapters\Secondary\TripScanning;
+namespace App\Tests\UberTop\RideBookingContext\Unit\UberTop\RideBookingContext\Adapters\Secondary\TripScanning;
 
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner;
 

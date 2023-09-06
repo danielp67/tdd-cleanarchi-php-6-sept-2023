@@ -37,3 +37,5 @@ services:
 
   App\UberTop\RideBookingContext\BusinessLogic\Models\DateProvider: '@deterministic.date.provider'
 
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository: '@App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\DoctrineRideRepository'
+

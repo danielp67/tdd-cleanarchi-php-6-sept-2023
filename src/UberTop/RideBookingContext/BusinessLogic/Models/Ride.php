@@ -40,4 +40,29 @@ class Ride
             $price *= 2;
         return $price;
     }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getRiderId(): string
+    {
+        return $this->riderId;
+    }
+
+    public function getDeparture(): string
+    {
+        return $this->departure;
+    }
+
+    public function getArrival(): string
+    {
+        return $this->arrival;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
 }

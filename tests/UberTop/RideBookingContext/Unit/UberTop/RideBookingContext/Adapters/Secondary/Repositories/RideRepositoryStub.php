@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\UberTop\RideBookingContext\Adapters\Secondary\Repositories;
+namespace App\Tests\UberTop\RideBookingContext\Unit\UberTop\RideBookingContext\Adapters\Secondary\Repositories;
 
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
