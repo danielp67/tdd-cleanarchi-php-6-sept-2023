@@ -4,6 +4,7 @@ namespace App\UberTop\RideBookingContext\Adapters\Primary\Symfony\Controllers;
 
 use App\UberTop\RideBookingContext\BusinessLogic\UseCases\Commands\RideBooking\BookRideCommand;
 use App\UberTop\RideBookingContext\BusinessLogic\UseCases\Commands\RideBooking\BookRideCommandHandler;
+use App\UberTop\RideBookingContext\BusinessLogic\UseCases\Queries\RidesHistoryRetrieval\RidesHistoryRetrievalQueryHandler;
 use Ramsey\Uuid\Rfc4122\UuidV4;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,7 +16,9 @@ class RideBookingController extends AbstractController
 {
 
 
-    public function __construct(private readonly BookRideCommandHandler $bookRide)
+    public function __construct(private readonly BookRideCommandHandler            $bookRide,
+                                private readonly RidesHistoryRetrievalQueryHandler $ridesHistoryRetrievalQueryHandler
+    )
     {
     }
 
@@ -31,6 +34,13 @@ class RideBookingController extends AbstractController
                 $arrival,
                 $wantsUberX));
         return $this->json('Ride booked', 201);
+    }
+
+    #[Route('', name: 'rides_history', methods: ['GET'])]
+    public function bookingsHistory(): JsonResponse
+    {
+        $bookingsHistory = $this->ridesHistoryRetrievalQueryHandler->handle();
+        return $this->json($bookingsHistory);
     }
 
 }
