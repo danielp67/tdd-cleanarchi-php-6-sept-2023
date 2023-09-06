@@ -17,19 +17,14 @@ class BookRide
     public function book(string $departure, string $arrival, bool $wantsUberX): void
     {
         $distance = $this->tripScanner->distance($departure, $arrival);
-
-        $price = 10 + $distance * 0.5;
-
-        if ($wantsUberX) {
-            $price += 5;
-        }
-
-        $this->rideRepository->save(new Ride(
+        $ride = Ride::book(
             "123abc",
             "234def",
             $departure,
             $arrival,
-            $price
-        ));
+            $distance,
+            $wantsUberX
+        );
+        $this->rideRepository->save($ride);
     }
 }
