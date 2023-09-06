@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts;
+namespace App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories;
 
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 

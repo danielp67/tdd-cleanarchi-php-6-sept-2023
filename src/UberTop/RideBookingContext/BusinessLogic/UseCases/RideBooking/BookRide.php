@@ -2,23 +2,27 @@
 
 namespace App\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking;
 
-use App\Tests\Unit\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking\RideRepositoryStub;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
-use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\RideRepository;
+use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
+use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner;
 
 class BookRide
 {
 
-    public function __construct(private readonly RideRepository $rideRepository) {}
-
-    public function book(): void
+    public function __construct(private readonly RideRepository $rideRepository,
+                                private readonly TripScanner    $tripScanner)
     {
+    }
+
+    public function book(string $departure, string $arrival): void
+    {
+        $distance = $this->tripScanner->distance($departure, $arrival);
         $this->rideRepository->save(new Ride(
             "123abc",
             "234def",
-            "8 avenue Foch Paris",
-            "8 avenue Foch Paris",
-            10
+            $departure,
+            $arrival,
+            10 + $distance * 0.5
         ));
     }
 }

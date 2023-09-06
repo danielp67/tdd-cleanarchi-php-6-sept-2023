@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Unit\UberTop\RideBookingContext\BusinessLogic\UseCases\RideBooking;
+namespace App\Tests\Unit\UberTop\RideBookingContext\Adapters\Secondary\Repositories;
 
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
-use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\RideRepository;
+use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 
 class RideRepositoryStub implements RideRepository
 {
