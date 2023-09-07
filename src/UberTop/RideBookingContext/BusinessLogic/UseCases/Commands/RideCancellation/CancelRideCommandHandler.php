@@ -2,6 +2,9 @@
 
 namespace App\UberTop\RideBookingContext\BusinessLogic\UseCases\Commands\RideCancellation;
 
+use App\UberTop\RideBookingContext\BusinessLogic\Models\CannotCancelAnotherRiderRide;
+use App\UberTop\RideBookingContext\BusinessLogic\Models\CannotCancelFinishedRide;
+use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -12,11 +15,14 @@ class CancelRideCommandHandler
     {
     }
 
+    /**
+     * @throws CannotCancelFinishedRide
+     * @throws CannotCancelAnotherRiderRide
+     */
     public function __invoke(CancelRideCommand $command): void
     {
         $ride = $this->rideRepository->byId($command->rideId);
-
-        $ride->cancel();
+        $ride->cancel($command->riderId);
         $this->rideRepository->save($ride);
     }
 }

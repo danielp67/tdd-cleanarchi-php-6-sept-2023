@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UberTop\RideBookingContext\BusinessLogic\Models\Exception;
+namespace App\UberTop\RideBookingContext\BusinessLogic\Models;
 
 use Exception;
 

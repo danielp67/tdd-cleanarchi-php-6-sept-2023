@@ -9,5 +9,5 @@ interface RideRepository
 {
     function save(Ride $ride): void;
 
-    public function byId(UuidInterface $rideId);
+    public function byId(UuidInterface $rideId): Ride;
 }
