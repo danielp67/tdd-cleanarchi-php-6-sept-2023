@@ -37,7 +37,7 @@ class RideBookingController extends AbstractController
     }
 
     #[Route('', name: 'rides_history', methods: ['GET'])]
-    public function bookingsHistory(): JsonResponse
+    public function ridesHistory(): JsonResponse
     {
         $bookingsHistory = $this->ridesHistoryRetrievalQueryHandler->__invoke();
         return $this->json($bookingsHistory);

@@ -6,7 +6,7 @@ use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\Tri
 use Ramsey\Uuid\Rfc4122\UuidV4;
 
 beforeEach(function () {
-    $this->container->get(DateProvider::class)->setDateNow(new \DateTime('2021-01-01 00:00:00'));
+    $this->container->get(DateProvider::class)->setDateNow(new \DateTime('2021-12-01 00:00:00'));
     $this->container->get(TripScanner::class)->setDistance(3);
 });
 
@@ -15,7 +15,6 @@ it('should book a ride with uberX and some distance', function () {
         'POST',
         '/rides',
         [
-            'riderId' => '05ae7bef-646c-429f-bde8-c2d77bf778b8',
             'departure' => '10 rue de Courcelles Paris',
             'arrival' => '8 avenue du Général de Gaulle Lyon',
             'wantsUberX' => true
