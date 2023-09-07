@@ -9,6 +9,7 @@ use Ramsey\Uuid\Rfc4122\UuidV4;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/rides')]
@@ -16,7 +17,7 @@ class RideBookingController extends AbstractController
 {
 
 
-    public function __construct(private readonly BookRideCommandHandler            $bookRide,
+    public function __construct(private readonly MessageBusInterface            $messageBus,
                                 private readonly RidesHistoryRetrievalQueryHandler $ridesHistoryRetrievalQueryHandler
     )
     {
@@ -28,11 +29,10 @@ class RideBookingController extends AbstractController
         $departure = $request->get('departure');
         $arrival = $request->get('arrival');
         $wantsUberX = $request->get('wantsUberX');
-        $this->bookRide->__invoke(
-            new BookRideCommand(UuidV4::fromString('b6b61e19-4e47-48db-a45a-dde8481b5a42'),
-                $departure,
-                $arrival,
-                $wantsUberX));
+        $this->messageBus->dispatch(new BookRideCommand(UuidV4::fromString('b6b61e19-4e47-48db-a45a-dde8481b5a42'),
+            $departure,
+            $arrival,
+            $wantsUberX));
         return $this->json('Ride booked', 201);
     }
 
