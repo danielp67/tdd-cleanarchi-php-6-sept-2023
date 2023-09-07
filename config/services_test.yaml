@@ -8,4 +8,10 @@ services:
     alias: App\UberTop\RideBookingContext\BusinessLogic\Models\DeterministicDateProvider
     public: true
 
-  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner: '@fake.trip.scanner'
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\UuidGeneration\UuidGenerator:
+    alias: App\UberTop\RideBookingContext\Adapters\Secondary\UuidGeneration\DeterministicUuidGenerator
+    public: true
+
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner:
+    alias: App\UberTop\RideBookingContext\Adapters\Secondary\TripScanning\TripScannerStub
+    public: true

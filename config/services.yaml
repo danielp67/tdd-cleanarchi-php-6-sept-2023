@@ -31,7 +31,7 @@ services:
   deterministic.date.provider:
     class: App\UberTop\RideBookingContext\BusinessLogic\Models\DeterministicDateProvider
     calls:
-      - setDateNowAsString: ['2023-12-25']
+      - setDateNowAsString: [ '2023-12-25' ]
 
   App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner: '@fake.trip.scanner'
 
@@ -40,4 +40,6 @@ services:
   App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository: '@App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\DoctrineRideRepository'
 
   App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Queries\RideQuery: '@App\UberTop\RideBookingContext\Adapters\Secondary\Queries\SqlRideQuery'
+
+  App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\UuidGeneration\UuidGenerator: '@App\UberTop\RideBookingContext\Adapters\Secondary\UuidGeneration\RandomUuidGenerator'
 
