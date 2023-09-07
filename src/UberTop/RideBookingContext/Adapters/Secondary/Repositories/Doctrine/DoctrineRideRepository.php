@@ -21,7 +21,7 @@ class DoctrineRideRepository implements RideRepository
     {
         $existingRideEntity = $this->entityManager->getRepository(RideEntity::class)
             ->find(UuidV4Alias::fromString($ride->getId()->toString()));
-        if($existingRideEntity !== null) {
+        if ($existingRideEntity !== null) {
             $existingRideEntity->setDeparture($ride->getDeparture());
             $existingRideEntity->setArrival($ride->getArrival());
             $existingRideEntity->setPrice($ride->getPrice());
@@ -42,8 +42,7 @@ class DoctrineRideRepository implements RideRepository
 
     public function byId(UuidInterface $rideId): Ride
     {
-        $rideEntity = $this->entityManager->getRepository(RideEntity::class)
-            ->find($rideId);
+        $rideEntity = $this->entityManager->getRepository(RideEntity::class)->find(UuidV4Alias::fromString($rideId));
         return new Ride(
             UuidV4::fromString($rideEntity->getId()),
             UuidV4::fromString($rideEntity->getRiderId()),
