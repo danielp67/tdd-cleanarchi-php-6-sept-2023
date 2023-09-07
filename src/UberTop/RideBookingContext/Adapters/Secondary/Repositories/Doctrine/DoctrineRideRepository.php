@@ -4,6 +4,7 @@ namespace App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrin
 
 use App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\Entities\RideEntity;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
+use App\UberTop\RideBookingContext\BusinessLogic\Models\RideStatus;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Rfc4122\UuidV4;
@@ -18,6 +19,16 @@ class DoctrineRideRepository implements RideRepository
 
     public function save(Ride $ride): void
     {
+        $existingRideEntity = $this->entityManager->getRepository(RideEntity::class)
+            ->find(UuidV4Alias::fromString($ride->getId()->toString()));
+        if($existingRideEntity !== null) {
+            $existingRideEntity->setDeparture($ride->getDeparture());
+            $existingRideEntity->setArrival($ride->getArrival());
+            $existingRideEntity->setPrice($ride->getPrice());
+            $existingRideEntity->setStatus($ride->getStatus()->name);
+            $this->entityManager->flush();
+            return;
+        }
         $rideEntity = new RideEntity(
             UuidV4Alias::fromString($ride->getId()->toString()),
             UuidV4Alias::fromString($ride->getRiderId()->toString()),
@@ -31,13 +42,15 @@ class DoctrineRideRepository implements RideRepository
 
     public function byId(UuidInterface $rideId): Ride
     {
-        $rideEntity = $this->entityManager->getRepository(RideEntity::class)->find($rideId);
+        $rideEntity = $this->entityManager->getRepository(RideEntity::class)
+            ->find($rideId);
         return new Ride(
             UuidV4::fromString($rideEntity->getId()),
             UuidV4::fromString($rideEntity->getRiderId()),
             $rideEntity->getDeparture(),
             $rideEntity->getArrival(),
-            $rideEntity->getPrice()
+            $rideEntity->getPrice(),
+            RideStatus::from($rideEntity->getStatus())
         );
     }
 }

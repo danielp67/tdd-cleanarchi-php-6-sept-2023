@@ -76,7 +76,7 @@ it('should cancel my current ride while waiting for the driver', function () {
     );
     // ASSERT
     $this->assertResponseStatusCodeSame(200);
-    assertJsonContent($this, 'Ride deleted');
+    assertJsonContent($this, 'Ride cancelled');
     $bookedRides = selectAllRides($this->entityManager);
     expect($bookedRides)->toEqual([
         new Ride(

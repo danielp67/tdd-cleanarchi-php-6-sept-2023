@@ -1,6 +1,7 @@
 <?php
 
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
+use App\UberTop\RideBookingContext\BusinessLogic\Models\RideStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Rfc4122\UuidV4;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -52,6 +53,7 @@ function selectAllRides(EntityManagerInterface $entityManager): array
                 $row['departure'],
                 $row['arrival'],
                 $row['price'],
+                RideStatus::from($row['status'])
             );
         }, $results);
     } catch (\Exception $e) {

@@ -49,7 +49,7 @@ class Ride
      */
     public function cancel(UuidInterface $riderId): void
     {
-        if($this->riderId !== $riderId)
+        if(!$this->riderId->equals($riderId))
             throw new CannotCancelAnotherRiderRide('cannot cancel a ride that is not yours');
         if ($this->status === RideStatus::FINISHED)
             throw new CannotCancelFinishedRide('blabla');
@@ -80,4 +80,10 @@ class Ride
     {
         return $this->price;
     }
+
+    public function getStatus(): RideStatus
+    {
+        return $this->status;
+    }
+
 }
