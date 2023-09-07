@@ -15,7 +15,7 @@ class RidesHistoryRetrievalQueryHandler
         $this->rideQueryGateway = $rideQueryGateway;
     }
 
-    public function handle(): RidesHistoryViewModel
+    public function __invoke(): RidesHistoryViewModel
     {
         return $this->rideQueryGateway->ridesHistory();
     }
