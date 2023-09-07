@@ -2,8 +2,10 @@
 
 namespace App\UberTop\RideBookingContext\BusinessLogic\Models;
 
+use App\UberTop\RideBookingContext\BusinessLogic\Models\Exception\CannotCancelFinishedRide;
 use DateTime;
 use Ramsey\Uuid\UuidInterface;
+
 class Ride
 {
 
@@ -12,7 +14,8 @@ class Ride
                                 private string $departure,
                                 private string $arrival,
                                 private float  $price,
-                                private RideStatus $status = RideStatus::WAITING_FOR_DRIVER)
+                                private RideStatus $status = RideStatus::WAITING_FOR_DRIVER,
+    )
     {
     }
 
@@ -66,15 +69,14 @@ class Ride
         return $this->price;
     }
 
-    public function getStatus(): RideStatus
+    /**
+     * @throws CannotCancelFinishedRide
+     */
+    public function cancel(): void
     {
-        return $this->status;
+        if ($this->status === RideStatus::FINISHED) {
+            throw new CannotCancelFinishedRide('blabla');
+        }
+        $this->status = RideStatus::CANCELLED;
     }
-
-    public function setStatus(RideStatus $status): void
-    {
-        $this->status = $status;
-    }
-
-
 }
