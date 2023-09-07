@@ -6,6 +6,7 @@ use App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\Enti
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Uid\UuidV4;
 
 class DoctrineRideRepository implements RideRepository
@@ -25,5 +26,10 @@ class DoctrineRideRepository implements RideRepository
         );
         $this->entityManager->persist($rideEntity);
         $this->entityManager->flush();
+    }
+
+    public function byId(UuidInterface $rideId)
+    {
+        // TODO: Implement byId() method.
     }
 }
