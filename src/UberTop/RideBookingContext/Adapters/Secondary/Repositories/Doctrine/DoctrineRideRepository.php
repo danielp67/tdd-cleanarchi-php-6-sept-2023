@@ -6,8 +6,9 @@ use App\UberTop\RideBookingContext\Adapters\Secondary\Repositories\Doctrine\Enti
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Rfc4122\UuidV4;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Uid\UuidV4;
+use Symfony\Component\Uid\UuidV4 as UuidV4Alias;
 
 class DoctrineRideRepository implements RideRepository
 {
@@ -18,8 +19,8 @@ class DoctrineRideRepository implements RideRepository
     public function save(Ride $ride): void
     {
         $rideEntity = new RideEntity(
-            UuidV4::fromString($ride->getId()),
-            UuidV4::fromString($ride->getRiderId()),
+            UuidV4Alias::fromString($ride->getId()->toString()),
+            UuidV4Alias::fromString($ride->getRiderId()->toString()),
             $ride->getDeparture(),
             $ride->getArrival(),
             $ride->getPrice()
@@ -28,8 +29,15 @@ class DoctrineRideRepository implements RideRepository
         $this->entityManager->flush();
     }
 
-    public function byId(UuidInterface $rideId)
+    public function byId(UuidInterface $rideId): Ride
     {
-        // TODO: Implement byId() method.
+        $rideEntity = $this->entityManager->getRepository(RideEntity::class)->find($rideId);
+        return new Ride(
+            UuidV4::fromString($rideEntity->getId()),
+            UuidV4::fromString($rideEntity->getRiderId()),
+            $rideEntity->getDeparture(),
+            $rideEntity->getArrival(),
+            $rideEntity->getPrice()
+        );
     }
 }

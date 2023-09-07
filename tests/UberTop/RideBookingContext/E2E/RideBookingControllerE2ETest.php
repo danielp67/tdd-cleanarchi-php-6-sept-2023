@@ -2,6 +2,8 @@
 
 use App\UberTop\RideBookingContext\BusinessLogic\Models\DateProvider;
 use App\UberTop\RideBookingContext\BusinessLogic\Models\Ride;
+use App\UberTop\RideBookingContext\BusinessLogic\Models\RideStatus;
+use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\Repositories\RideRepository;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\TripScanning\TripScanner;
 use App\UberTop\RideBookingContext\BusinessLogic\SecondaryPorts\UuidGeneration\UuidGenerator;
 use Ramsey\Uuid\Rfc4122\UuidV4;
@@ -14,7 +16,7 @@ beforeEach(function () {
             UuidV4::fromString('d9b61e19-4e47-48db-a45a-dde8481b5a42'));
 });
 
-it('should book a ride with uberX and some distance', function () {
+it('should book some rides with uberX and some distance', function () {
     $this->client->request(
         'POST',
         '/rides',
@@ -51,6 +53,40 @@ it('should book a ride with uberX and some distance', function () {
             '8 avenue du Général de Gaulle Lyon',
             27.5,
         )
+    ]);
+});
+
+it('should cancel my current ride while waiting for the driver', function () {
+
+    // ARRANGE
+    $this->container->get(RideRepository::class)->save(
+        new Ride(
+            UuidV4::fromString('a56ee94f-799a-46eb-97b2-2e5dece46339'),
+            UuidV4::fromString('b6b61e19-4e47-48db-a45a-dde8481b5a42'),
+            '10 rue de Courcelles Paris',
+            '8 avenue du Général de Gaulle Lyon',
+            16.5,
+        )
+    );
+    // ACT
+    $this->client->request(
+        'DELETE',
+        '/rides/a56ee94f-799a-46eb-97b2-2e5dece46339',
+        []
+    );
+    // ASSERT
+    $this->assertResponseStatusCodeSame(200);
+    assertJsonContent($this, 'Ride deleted');
+    $bookedRides = selectAllRides($this->entityManager);
+    expect($bookedRides)->toEqual([
+        new Ride(
+            UuidV4::fromString('a56ee94f-799a-46eb-97b2-2e5dece46339'),
+            UuidV4::fromString('b6b61e19-4e47-48db-a45a-dde8481b5a42'),
+            '10 rue de Courcelles Paris',
+            '8 avenue du Général de Gaulle Lyon',
+            16.5,
+            RideStatus::CANCELLED
+        ),
     ]);
 });
 

@@ -25,11 +25,11 @@ class RideEntity
     #[ORM\Column(type: 'float')]
     private float $price;
 
-    public function __construct(UuidV4             $id,
-                                UuidV4             $riderId,
-                                string             $departure,
-                                string             $arrival,
-                                float              $price)
+    public function __construct(UuidV4 $id,
+                                UuidV4 $riderId,
+                                string $departure,
+                                string $arrival,
+                                float  $price)
     {
         $this->id = $id;
         $this->departure = $departure;
@@ -43,5 +43,26 @@ class RideEntity
     {
         return $this->id;
     }
+
+    public function getRiderId(): UuidV4
+    {
+        return $this->riderId;
+    }
+
+    public function getDeparture(): string
+    {
+        return $this->departure;
+    }
+
+    public function getArrival(): string
+    {
+        return $this->arrival;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
 
 }

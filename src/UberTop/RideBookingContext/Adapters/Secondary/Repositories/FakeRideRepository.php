@@ -15,7 +15,7 @@ class FakeRideRepository implements RideRepository
         $this->rides[] = $ride;
     }
 
-    public function byId(UuidInterface $rideId)
+    public function byId(UuidInterface $rideId): Ride
     {
         // TODO: Implement byId() method.
     }

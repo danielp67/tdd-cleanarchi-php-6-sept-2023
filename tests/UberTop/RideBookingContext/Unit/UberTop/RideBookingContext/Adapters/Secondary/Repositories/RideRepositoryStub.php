@@ -16,7 +16,7 @@ class RideRepositoryStub implements RideRepository
         $this->rides[$ride->getId()->toString()] = $ride;
     }
 
-    public function byId(UuidInterface $rideId): ?Ride
+    public function byId(UuidInterface $rideId): Ride
     {
         return clone $this->rides[$rideId->toString()];
     }
