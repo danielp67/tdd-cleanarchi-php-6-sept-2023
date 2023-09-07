@@ -6,8 +6,8 @@ use Ramsey\Uuid\UuidInterface;
 
 class CancelRideCommand
 {
-    public function __construct(
-        public readonly UuidInterface $rideId,
-    ) {
+    public function __construct(public readonly UuidInterface $rideId,
+                                public readonly UuidInterface $riderId)
+    {
     }
 }
