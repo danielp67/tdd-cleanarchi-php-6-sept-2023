@@ -10,7 +10,7 @@ beforeEach(function () {
     $this->container->get(TripScanner::class)->setDistance(3);
 });
 
-it('should book a ride from Paris to Outside', function () {
+it('should book a ride with uberX and some distance', function () {
     $this->client->request(
         'POST',
         '/rides',
