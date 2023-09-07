@@ -11,7 +11,8 @@ class Ride
                                 private UuidInterface $riderId,
                                 private string $departure,
                                 private string $arrival,
-                                private float  $price)
+                                private float  $price,
+                                private RideStatus $status = RideStatus::WAITING_FOR_DRIVER)
     {
     }
 
@@ -64,4 +65,16 @@ class Ride
     {
         return $this->price;
     }
+
+    public function getStatus(): RideStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(RideStatus $status): void
+    {
+        $this->status = $status;
+    }
+
+
 }
